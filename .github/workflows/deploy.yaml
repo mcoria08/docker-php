@@ -14,8 +14,8 @@ jobs:
       - name: Run Tests
         working-directory: ./app
         run: composer run-phpunit
-      - run: docker build --target app -t garyclarke/php-composer:1.2 -f ./php/Dockerfile .
-      - run: docker build -t garyclarke/nginx-php:1.0 -f ./nginx/Dockerfile .
+      - run: docker build --target app -t mcoria/php-composer:1.2 -f ./php/Dockerfile .
+      - run: docker build -t mcoria/nginx-php:1.0 -f ./nginx/Dockerfile .
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker push garyclarke/php-composer:1.2
-      - run: docker push garyclarke/nginx-php:1.0
+      - run: docker push mcoria/php-composer:1.2
+      - run: docker push mcoria/nginx-php:1.0
