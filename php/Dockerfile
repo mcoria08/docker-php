@@ -38,18 +38,19 @@ RUN composer dump-autoload --optimize
 # This stage is meant to be target-built into a separate image
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
-#FROM app as app_dev
+FROM app as app_dev
 
 # Xdebug has different modes / functionalities. We can default to 'off' and set to 'debug'
 # when we run docker compose up if we need it
-#ENV XDEBUG_MODE=off
+ENV XDEBUG_MODE=off
 
 # Copy xdebug config file into container
 #COPY ./php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY ./php/conf.d/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
 
 # Install xdebug
 RUN set -eux; \
-    install-php-extensions xdebug
+	install-php-extensions xdebug
 
 
 
